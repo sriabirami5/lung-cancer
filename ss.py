@@ -1,12 +1,12 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestClassifier
 from fastapi import FastAPI
 app= FastAPI()
 @app.get("/data/")
 def lungcancer(age:int,gender:int,family_history:int,smoking_status:float,bmi:float,cholesterol_level:int,hypertension:int,asthma:int,cirrhosis:int,other_cancer:int,treatment_type:int,cancer_stage:int):
-    LR=LinearRegression()
+    LR=RandomForestClassifier(n_estimators=100, random_state=42)
     data_df=pd.read_csv('Lung Cancer.csv')
     x=data_df.drop('survived',axis=1)
     y=data_df['survived']
